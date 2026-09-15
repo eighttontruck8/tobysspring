@@ -33,13 +33,18 @@ public class PaymentService {
         ExRateData data = mapper.readValue(response, ExRateData.class);
         // System.out.println(data);
         BigDecimal exRate = data.rates().get("KRW");// map이니까 값을 꺼내와야함
-        System.out.println(exRate);
+        // System.out.println(exRate);
 
         // TODO 2. 금액 계산
-        
-        // TODO 3. 유효시간 계산
+        // BigDecimal convertedAmount = exRate * foreignCurrencyAmount; // bigDecimal은 숫자 타입이 아닌 객체라서 * 연산자를 바로 사용하지 못함.!!!
+        BigDecimal convertedAmount = exRate.multiply(foreignCurrencyAmount);
+        // System.out.println(convertedAmount + currency);
 
-        return new Payment(orderId, currency, foreignCurrencyAmount, BigDecimal.ZERO, BigDecimal.ZERO, LocalDateTime.now());
+        // TODO 3. 유효시간 계산
+        LocalDateTime validUntil = LocalDateTime.now().plusMinutes(30);
+        // System.out.println(validUntil);
+
+        return new Payment(orderId, currency, foreignCurrencyAmount, exRate, convertedAmount, LocalDateTime.now());
     }
 
     public static void main(String[] args) throws IOException { //static 메서드니까 prepare를 바로 실행 불가. 변수에 담아야함.
