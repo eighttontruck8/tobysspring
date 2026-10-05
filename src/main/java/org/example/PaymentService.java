@@ -18,9 +18,9 @@ class PaymentService {
     // private WebApiExRateProvider exRateProvider; // 매번 호출할 때마다 만드는 것은 비효율적이므로 인스턴스 변수(필드)로 위치 변경
     private final ExRateProvider exRateProvider;
 
-    public PaymentService() {
+    public PaymentService(ExRateProvider exRateProvider) {
         // this.exRateProvider = new WebApiExRateProvider();
-        this.exRateProvider = new WebApiExRateProvider();
+        this.exRateProvider = exRateProvider; // 책임(어떤 인터페이스 구현한 클래스를 사용할지)을 지지 않게 되었다
 
     }
 
