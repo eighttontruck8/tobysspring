@@ -15,7 +15,6 @@ public class Client {
         BeanFactory beanFactory = new AnnotationConfigApplicationContext(ObjectFactory.class);
         PaymentService paymentService = beanFactory.getBean(PaymentService.class);
 
-
         // 2. paymentService 사용해서 실제 업무 진행
         Payment payment = paymentService.prepare(100L, "USD", BigDecimal.valueOf(50.7)); // 변수에 담음
         System.out.println(payment); // payment 타입이 출력됨
