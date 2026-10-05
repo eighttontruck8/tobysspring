@@ -15,13 +15,18 @@ import java.util.stream.Collectors;
 
 class PaymentService {
     // 주문번호, 외국통화종류, 외국 통화 기준 결제 금액 request
+    private WebApiExRateProvider webApiExRateProvider; // 매번 호출할 때마다 만드는 것은 비효율적이므로 인스턴스 변수(필드)로 위치 변경
+
+    public PaymentService() {
+        this.webApiExRateProvider = new WebApiExRateProvider();
+    }
+
     public Payment prepare(Long orderId, String currency, BigDecimal foreignCurrencyAmount) throws IOException { // payment타입 객체를 return하는 prepare함수(매개변수x)
-        WebApiExRateProvider webApiExRateProvider = new WebApiExRateProvider();
+
         BigDecimal exRate = webApiExRateProvider.getWebExRate(currency);
         BigDecimal convertedAmount = exRate.multiply(foreignCurrencyAmount);
         LocalDateTime validUntil = LocalDateTime.now().plusMinutes(30);
 
         return new Payment(orderId, currency, foreignCurrencyAmount, exRate, convertedAmount, validUntil);
     }
-
 }
