@@ -1,5 +1,9 @@
 package org.example;
 
+import org.example.exrate.CachedExRateProvider;
+import org.example.payment.ExRateProvider;
+import org.example.exrate.WebApiExRateProvider;
+import org.example.payment.PaymentService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
