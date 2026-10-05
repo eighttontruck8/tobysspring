@@ -10,9 +10,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.stream.Collectors;
 
-public class WebApiExRatePaymentService extends PaymentService {
-    @Override
-    BigDecimal getExRate(String currency) throws IOException {
+public class WebApiExRateProvider {
+    BigDecimal getWebExRate(String currency) throws IOException {
         URL url  = new URL("http://open.er-api.com/v6/latest/" + currency);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
@@ -22,8 +21,8 @@ public class WebApiExRatePaymentService extends PaymentService {
 
         ObjectMapper mapper = new ObjectMapper();
         ExRateData data = mapper.readValue(response, ExRateData.class); // class 객체 정보를 가져옴. response를 ExRateData타입 객체로 만들기.
-        BigDecimal exRate = data.rates().get("KRW");// map이니까 값을 꺼내와야함
+        // map이니까 값을 꺼내와야함
 
-        return exRate;
+        return data.rates().get("KRW");
     }
 }
