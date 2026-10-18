@@ -11,7 +11,7 @@ public class SortTest {
     Sort sort;
     @BeforeEach
     void beforeEach() {
-        sort = new Sort();
+        sort = new Sort(); // 모든 테스트는 독립적으로 시행되어야한다(영향주면안됨x)
     }
 
     @Test
