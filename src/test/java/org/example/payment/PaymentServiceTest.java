@@ -31,7 +31,7 @@ class PaymentServiceTest {
 
         Payment payment = paymentService.prepare(1L, "USD", BigDecimal.TEN);
 
-        assertThat(payment.getExRate()).isEqualTo(exRate);
+        assertThat(payment.getExRate()).isEqualTo(exRate); // bigdecimal로 isequalsto 사용하는 건 위험하다. 숫자 분 아니라 소수점 이하 자릿수 등이 모두 포함되기 때문이다. is equalbycompartingto
         assertThat(payment.getConvertedAmount())
                 .isEqualTo(convertedAmount);
     }
