@@ -3,6 +3,7 @@ package org.example.exrate;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.payment.ExRateProvider;
+import org.springframework.lang.NonNull;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -27,21 +28,32 @@ public class WebApiExRateProvider implements ExRateProvider {
 
         String response ;
         try {
-            HttpURLConnection connection = (HttpURLConnection) uri.toURL().openConnection();
-
-            try (BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
-                response = br.lines().collect(Collectors.joining()); // br.close() 생략 가능
-            }
+            response = excuteApi(uri);
         } catch(IOException e) {
             throw new RuntimeException(e);
         }
 
         try {
-            ObjectMapper mapper = new ObjectMapper();
-            ExRateData data = mapper.readValue(response, ExRateData.class);
-            return data.rates().get("KRW");
+            return parseExRate(response);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private static BigDecimal parseExRate(String response) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        ExRateData data = mapper.readValue(response, ExRateData.class);
+        return data.rates().get("KRW");
+    }
+
+    @NonNull
+    private static String excuteApi(URI uri) throws IOException {
+        String response;
+        HttpURLConnection connection = (HttpURLConnection) uri.toURL().openConnection();
+
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+            response = br.lines().collect(Collectors.joining()); // br.close() 생략 가능
+        }
+        return response;
     }
 }
