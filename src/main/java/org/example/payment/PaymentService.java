@@ -17,7 +17,7 @@ public class PaymentService {
         this.exRateProvider = exRateProvider; // 책임(어떤 인터페이스 구현한 클래스를 사용할지)을 지지 않게 되었다
     }
 
-    public Payment prepare(Long orderId, String currency, BigDecimal foreignCurrencyAmount) throws IOException { // payment타입 객체를 return하는 prepare함수(매개변수x)
+    public Payment prepare(Long orderId, String currency, BigDecimal foreignCurrencyAmount) { // payment타입 객체를 return하는 prepare함수(매개변수x)
         // BigDecimal exRate = exRateProvider.getWebExRate(currency);
         BigDecimal exRate = exRateProvider.getExRate(currency);
 
