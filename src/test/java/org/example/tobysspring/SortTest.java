@@ -1,4 +1,4 @@
-package org.example;
+package org.example.tobysspring;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

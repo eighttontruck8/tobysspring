@@ -1,4 +1,4 @@
-package org.example.payment;
+package org.example.tobysspring.payment;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

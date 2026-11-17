@@ -1,20 +1,14 @@
-package org.example.payment;
+package org.example.tobysspring.payment;
 
-import org.example.ObjectFactory;
-import org.example.TestObjectFactory;
-import org.junit.jupiter.api.DisplayName;
+import org.example.tobysspring.TestObjectFactory;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.lang.NonNull;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
 @ExtendWith(SpringExtension.class)

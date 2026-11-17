@@ -1,4 +1,4 @@
-package org.example.exrate;
+package org.example.tobysspring.exrate;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
